@@ -1,6 +1,6 @@
 # Detail Design v2
 
-> Lưu ý: Các flow/wireframe/chart trực quan nằm trong file .xlsx; markdown chỉ thể hiện dữ liệu bảng/text.
+> Lưu ý: Flow/chart/hyperlink điều hướng trực quan nằm trong file .xlsx; markdown chỉ thể hiện bảng text.
 
 ## Sheet: 00_ReadMe_Visual
 
@@ -8,6 +8,40 @@
 | --- | --- | --- | --- | --- | --- | --- |
 |  | Đọc nhanh theo thứ tự:<br>1) ERD_Star_Visual_v2<br>2) ETL_Swimlane_v2<br>3) Traceability_Matrix_v2<br>4) RLS_Heatmap_v2<br>5) Refresh_Monitor_v2 |  |  | Ý nghĩa màu:<br>Xanh đậm: thành phần lõi<br>Xanh lá: vận hành ổn định<br>Cam/Đỏ: rủi ro/cảnh báo<br>Xám: chi tiết dữ liệu<br><br>Bản v2 nhằm giảm độ nặng chữ, tăng khả năng review liên phòng ban. |  |  |
 |  | TIP: Stakeholder có thể review flow + chart trước, sau đó mới xuống các sheet DataModel/SourceMapping/DAX để xác nhận khả thi triển khai. |  |  |  |  |  |
+|  | Quick Links - Bắt đầu đọc từ đây |  |  |  |  |  |
+|  | Step | Sheet | Mục tiêu |  |  |  |
+|  | 1 | 00_ReadMe_Visual | Nắm roadmap đọc tài liệu detail |  |  |  |
+|  | 2 | ERD_Star_Visual_v2 | Hiểu cấu trúc star schema trực quan |  |  |  |
+|  | 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và các gate kiểm soát |  |  |  |
+|  | 4 | Overview | Hiểu SLA, tầng dữ liệu, giả định triển khai |  |  |  |
+|  | 5 | Modules | Hiểu phạm vi từng subject area |  |  |  |
+|  | 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard |  |  |  |
+|  | 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding |  |  |  |
+|  | 8 | KPI | Hiểu business definition + ngưỡng KPI |  |  |  |
+
+## Sheet: 01_Reading_Path_v2
+
+| DETAIL DESIGN - RECOMMENDED READING PATH |  |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- |
+| Đọc theo thứ tự từ trên xuống. Cột "Liên kết sheet" có hyperlink để nhảy trực tiếp tới sheet tương ứng. |  |  |  |  |  |  |
+| Step | Liên kết sheet | Mục tiêu đọc | Input nhận từ | Output chuyển tới | Persona chính | Kết quả kỳ vọng |
+| 1 | 00_ReadMe_Visual | Nắm roadmap đọc tài liệu detail | - | ERD_Star_Visual_v2 | All | Biết điểm bắt đầu |
+| 2 | ERD_Star_Visual_v2 | Hiểu cấu trúc star schema trực quan | ReadMe | ETL_Swimlane_v2 | Data + BI Dev | Nắm liên kết Fact/Dim |
+| 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và các gate kiểm soát | ERD | Overview | Data Engineer | Chốt luồng pipeline |
+| 4 | Overview | Hiểu SLA, tầng dữ liệu, giả định triển khai | ETL Flow | Modules | Architect + PM | Đồng thuận kiến trúc |
+| 5 | Modules | Hiểu phạm vi từng subject area | Overview | DashboardCatalog | Business | Ưu tiên backlog |
+| 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard | Modules | DashboardLayoutSpec | Report Designer | Chốt trang báo cáo |
+| 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding | DashboardCatalog | KPI | Power BI Dev | Triển khai UI/UX report |
+| 8 | KPI | Hiểu business definition + ngưỡng KPI | Dashboard Spec | Traceability_Matrix_v2 | Business + QA | Chốt tiêu chí nghiệm thu |
+| 9 | Traceability_Matrix_v2 | Trace KPI -> DAX -> Source -> Test | KPI | DataModel | Dev + QA | Không thiếu mapping |
+| 10 | DataModel | Chi tiết field-level cho Fact/Dim | Traceability | ModelRelationships | Data Modeler | Build model chính xác |
+| 11 | ModelRelationships | Hiểu cardinality/filter direction | DataModel | SourceMapping | Power BI Dev | Tránh lỗi filter mơ hồ |
+| 12 | SourceMapping | Map source field -> semantic field + transform | Model | DAXLogic | ETL Dev | Triển khai ETL chuẩn |
+| 13 | DAXLogic | Công thức DAX đầy đủ + test case | KPI + Mapping | BusinessRules | Power BI Dev | Measure chạy đúng logic |
+| 14 | BusinessRules | Luật nghiệp vụ và ngoại lệ ngành xây dựng | DAX | RLS_Heatmap_v2 | Business + QA | Bộ rule kiểm thử hoàn chỉnh |
+| 15 | RLS_Heatmap_v2 | Nhìn nhanh phạm vi role và access | BusinessRules | RLS | Security | Xác nhận policy trước publish |
+| 16 | RLS | DAX filter role-level cho Power BI Service | RLS Heatmap | Refresh_Monitor_v2 | Security + Admin | Thiết lập phân quyền chính thức |
+| 17 | Refresh_Monitor_v2 | Theo dõi vận hành refresh/DQ sau triển khai | All implementation | Runbook | Operations | Sẵn sàng go-live monitoring |
 
 ## Sheet: ERD_Star_Visual_v2
 
@@ -88,7 +122,7 @@
 | Phạm vi triển khai | Thiết kế chi tiết semantic model, dashboard, KPI, RLS cho 20 dự án xây dựng; dùng trực tiếp cho đội developer triển khai. |
 | Nguồn dữ liệu chính | SQL Server: ERP, PMIS, Procurement, Cost Control, Identity |
 | Công nghệ sử dụng | SQL Server 2022, SSIS, Power Query M, DAX, XMLA Endpoint, Power BI Service |
-| Phiên bản tài liệu | v2.0 - Detail Design (Visual Enhanced) |
+| Phiên bản tài liệu | v2.1 - Detail Design (Visual + Navigation Linked) |
 | Người tạo / Ngày tạo | Senior BI Solution Architect / 2026-02-10 |
 | Tiêu chuẩn phát triển | Naming: Fact*/Dim*; DateKey dạng YYYYMMDD; model star schema |
 
@@ -102,17 +136,37 @@
 | v0.9 | 2026-02-08 | Security Architect | Bổ sung role matrix và hướng dẫn RLS. |
 | v1.0 | 2026-02-10 | Senior BI Solution Architect | Phát hành tài liệu detail cho triển khai. |
 | v2.0 | 2026-02-10 | Senior BI Solution Architect | Bổ sung ERD visual, ETL swimlane, traceability matrix, RLS heatmap, refresh monitoring charts. |
+| v2.1 | 2026-02-10 | Senior BI Solution Architect | Bổ sung Reading Path + hyperlink điều hướng từ Overview tới các sheet thiết kế chi tiết theo thứ tự implement. |
 
 ## Sheet: Overview
 
-| Hạng mục | Mô tả chi tiết |
-| --- | --- |
-| Kiến trúc end-to-end | SQL Server OLTP -> SSIS ETL -> DW_Raw -> DW_Clean -> DW_Semantic (star schema) -> Power BI Dataset -> Power BI App. |
-| Luồng dữ liệu | Dimension full-load 01:00 hằng ngày; fact incremental mỗi 2 giờ theo watermark LastUpdatedDatetime; refresh dataset 06/09/12/15/18/21h. |
-| Phân tầng Raw | Giữ dữ liệu gần nguồn + ETLBatchID + ExtractedAtUTC để audit/replay. |
-| Phân tầng Clean | Chuẩn hóa UOM, mã master data, chuẩn email UPN, xử lý duplicate business key. |
-| Phân tầng Semantic | Star schema surrogate key int, quan hệ single-direction, ưu tiên measure để tối ưu model size. |
-| ASCII architecture | [SQL Server OLTP]<br> ERP \| PMIS \| Procurement \| Cost \| Identity<br>                \|<br>          [SSIS Orchestration]<br>                \|<br>      [DW_Raw] -> [DW_Clean] -> [DW_Semantic]<br>                               \|<br>                    [Power BI Dataset]<br>                               \|<br>         [Executive][Material][Cost][Progress]<br>                               \|<br>                 [Power BI Service + RLS] |
+| Hạng mục | Mô tả chi tiết |  |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| Kiến trúc end-to-end | SQL Server OLTP -> SSIS ETL -> DW_Raw -> DW_Clean -> DW_Semantic (star schema) -> Power BI Dataset -> Power BI App. |  |  |  |  |
+| Luồng dữ liệu | Dimension full-load 01:00 hằng ngày; fact incremental mỗi 2 giờ theo watermark LastUpdatedDatetime; refresh dataset 06/09/12/15/18/21h. |  |  |  |  |
+| Phân tầng Raw | Giữ dữ liệu gần nguồn + ETLBatchID + ExtractedAtUTC để audit/replay. |  |  |  |  |
+| Phân tầng Clean | Chuẩn hóa UOM, mã master data, chuẩn email UPN, xử lý duplicate business key. |  |  |  |  |
+| Phân tầng Semantic | Star schema surrogate key int, quan hệ single-direction, ưu tiên measure để tối ưu model size. |  |  |  |  |
+| ASCII architecture | [SQL Server OLTP]<br> ERP \| PMIS \| Procurement \| Cost \| Identity<br>                \|<br>          [SSIS Orchestration]<br>                \|<br>      [DW_Raw] -> [DW_Clean] -> [DW_Semantic]<br>                               \|<br>                    [Power BI Dataset]<br>                               \|<br>         [Executive][Material][Cost][Progress]<br>                               \|<br>                 [Power BI Service + RLS] |  |  |  |  |
+| NAVIGATION FROM OVERVIEW |  |  |  |  |  |
+| Step | Đi tới sheet | Đọc để làm gì | Input | Output | Ai nên đọc |
+| 1 | 00_ReadMe_Visual | Nắm roadmap đọc tài liệu detail | - | ERD_Star_Visual_v2 | All |
+| 2 | ERD_Star_Visual_v2 | Hiểu cấu trúc star schema trực quan | ReadMe | ETL_Swimlane_v2 | Data + BI Dev |
+| 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và các gate kiểm soát | ERD | Overview | Data Engineer |
+| 4 | Overview | Hiểu SLA, tầng dữ liệu, giả định triển khai | ETL Flow | Modules | Architect + PM |
+| 5 | Modules | Hiểu phạm vi từng subject area | Overview | DashboardCatalog | Business |
+| 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard | Modules | DashboardLayoutSpec | Report Designer |
+| 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding | DashboardCatalog | KPI | Power BI Dev |
+| 8 | KPI | Hiểu business definition + ngưỡng KPI | Dashboard Spec | Traceability_Matrix_v2 | Business + QA |
+| 9 | Traceability_Matrix_v2 | Trace KPI -> DAX -> Source -> Test | KPI | DataModel | Dev + QA |
+| 10 | DataModel | Chi tiết field-level cho Fact/Dim | Traceability | ModelRelationships | Data Modeler |
+| 11 | ModelRelationships | Hiểu cardinality/filter direction | DataModel | SourceMapping | Power BI Dev |
+| 12 | SourceMapping | Map source field -> semantic field + transform | Model | DAXLogic | ETL Dev |
+| 13 | DAXLogic | Công thức DAX đầy đủ + test case | KPI + Mapping | BusinessRules | Power BI Dev |
+| 14 | BusinessRules | Luật nghiệp vụ và ngoại lệ ngành xây dựng | DAX | RLS_Heatmap_v2 | Business + QA |
+| 15 | RLS_Heatmap_v2 | Nhìn nhanh phạm vi role và access | BusinessRules | RLS | Security |
+| 16 | RLS | DAX filter role-level cho Power BI Service | RLS Heatmap | Refresh_Monitor_v2 | Security + Admin |
+| 17 | Refresh_Monitor_v2 | Theo dõi vận hành refresh/DQ sau triển khai | All implementation | Runbook | Operations |
 
 ## Sheet: Modules
 

@@ -1,13 +1,42 @@
 # Basic Design v2
 
-> Lưu ý: Các flow/wireframe/chart trực quan nằm trong file .xlsx; markdown chỉ thể hiện dữ liệu bảng/text.
+> Lưu ý: Flow/chart/hyperlink điều hướng trực quan nằm trong file .xlsx; markdown chỉ thể hiện bảng text.
 
 ## Sheet: 00_ReadMe_Visual
 
-|  | BASIC DESIGN V2 - VISUAL GUIDE (Construction BI) |  |  |  |  |
-| --- | --- | --- | --- | --- | --- |
-|  | B1. Đọc nhanh trong 5 phút<br><br>1) Xem sheet Architecture_Flow_v2<br>2) Xem KPI_Story_Chart để nắm xu hướng<br>3) Xem Dashboard_Wireframe_v2 để hiểu bố cục<br>4) Xem SignOff_v2 để chốt phạm vi |  | B2. Legend màu<br><br>Xanh đậm: Layer hệ thống<br>Xanh nhạt: KPI/Insight<br>Cam: Cảnh báo/rủi ro<br>Xám: Dữ liệu nền/chi tiết<br><br>Các chart trong bản v2 dùng dữ liệu minh họa logic dự án xây dựng quy mô lớn. |  |  |
-|  | Mục tiêu của v2: giảm tài liệu thuần chữ, tăng khả năng đọc nhanh cho stakeholder bằng flow + visual + mockup có thể trao đổi trực tiếp với team dev/report designer. |  |  |  |  |
+|  | BASIC DESIGN V2 - VISUAL GUIDE (Construction BI) |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- |
+|  | B1. Đọc nhanh trong 5 phút<br><br>1) Xem sheet Architecture_Flow_v2<br>2) Xem KPI_Story_Chart để nắm xu hướng<br>3) Xem Dashboard_Wireframe_v2 để hiểu bố cục<br>4) Xem SignOff_v2 để chốt phạm vi |  | B2. Legend màu<br><br>Xanh đậm: Layer hệ thống<br>Xanh nhạt: KPI/Insight<br>Cam: Cảnh báo/rủi ro<br>Xám: Dữ liệu nền/chi tiết<br><br>Các chart trong bản v2 dùng dữ liệu minh họa logic dự án xây dựng quy mô lớn. |  |  |  |
+|  | Mục tiêu của v2: giảm tài liệu thuần chữ, tăng khả năng đọc nhanh cho stakeholder bằng flow + visual + mockup có thể trao đổi trực tiếp với team dev/report designer. |  |  |  |  |  |
+|  | Quick Links - Bắt đầu đọc từ đây |  |  |  |  |  |
+|  | Step | Sheet | Mục tiêu |  |  |  |
+|  | 1 | 00_ReadMe_Visual | Nắm cấu trúc tài liệu và legend màu |  |  |  |
+|  | 2 | Architecture_Flow_v2 | Hiểu kiến trúc end-to-end từ source đến report |  |  |  |
+|  | 3 | Overview | Hiểu tầng dữ liệu, flow và quy tắc triển khai mức cao |  |  |  |
+|  | 4 | Modules | Hiểu từng subject area và người dùng chính |  |  |  |
+|  | 5 | Dashboards | Hiểu dashboard mục tiêu và insight kỳ vọng |  |  |  |
+|  | 6 | KPI | Hiểu định nghĩa KPI và ngưỡng cảnh báo |  |  |  |
+|  | 7 | DataModel | Hiểu fact/dim và khóa liên kết chính |  |  |  |
+|  | 8 | SourceMapping | Map chi tiết từ SQL Server sang Power BI |  |  |  |
+
+## Sheet: 01_Reading_Path_v2
+
+| BASIC DESIGN - RECOMMENDED READING PATH |  |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- |
+| Đọc theo thứ tự từ trên xuống. Cột "Liên kết sheet" có hyperlink để nhảy trực tiếp tới sheet tương ứng. |  |  |  |  |  |  |
+| Step | Liên kết sheet | Mục tiêu đọc | Input nhận từ | Output chuyển tới | Persona chính | Kết quả kỳ vọng |
+| 1 | 00_ReadMe_Visual | Nắm cấu trúc tài liệu và legend màu | - | Architecture_Flow_v2 | All | Biết bức tranh tổng thể |
+| 2 | Architecture_Flow_v2 | Hiểu kiến trúc end-to-end từ source đến report | ReadMe | Overview | Stakeholder + Architect | Thống nhất scope kỹ thuật |
+| 3 | Overview | Hiểu tầng dữ liệu, flow và quy tắc triển khai mức cao | Architecture | Modules | PMO + Business | Khóa phạm vi nghiệp vụ |
+| 4 | Modules | Hiểu từng subject area và người dùng chính | Overview | Dashboards | Business Owner | Chốt module ưu tiên |
+| 5 | Dashboards | Hiểu dashboard mục tiêu và insight kỳ vọng | Modules | KPI | Sponsor + BI Lead | Chốt hướng phân tích |
+| 6 | KPI | Hiểu định nghĩa KPI và ngưỡng cảnh báo | Dashboards | DataModel | Business + Data | Chốt logic đo lường |
+| 7 | DataModel | Hiểu fact/dim và khóa liên kết chính | KPI | SourceMapping | Data Engineer | Chốt khung semantic model |
+| 8 | SourceMapping | Map chi tiết từ SQL Server sang Power BI | DataModel | DAXLogic | ETL Dev | Triển khai pipeline ETL |
+| 9 | DAXLogic | Hiểu công thức measure chính | KPI + Model | BusinessRules | Power BI Dev | Triển khai semantic logic |
+| 10 | BusinessRules | Hiểu luật nghiệp vụ và ngoại lệ | DAX + Mapping | RLS | Business + QA | Chốt test case nghiệp vụ |
+| 11 | RLS | Hiểu role và phân quyền dữ liệu | BusinessRules | SignOff_v2 | Security + PM | Sẵn sàng UAT |
+| 12 | SignOff_v2 | Ký xác nhận liên phòng ban | All previous | Go-live prep | PMO + Sponsor | Đủ điều kiện triển khai |
 
 ## Sheet: Architecture_Flow_v2
 
@@ -59,7 +88,7 @@
 | Phạm vi triển khai | Triển khai BI cho 20 dự án xây dựng dân dụng + công nghiệp, tập trung vật tư, chi phí, tiến độ và hiệu suất nhà thầu. |
 | Nguồn dữ liệu chính | SQL Server (ERP, PMIS, Procurement, Cost Control) |
 | Công nghệ sử dụng | SQL Server 2022, SSIS, Power Query M, DAX, Power BI Service, Azure AD |
-| Phiên bản tài liệu | v2.0 - Basic Design (Visual Enhanced) |
+| Phiên bản tài liệu | v2.1 - Basic Design (Visual + Navigation Linked) |
 | Người tạo / Ngày tạo | Senior BI Solution Architect / 2026-02-10 |
 | Môi trường | DEV / UAT / PROD (tách gateway + workspace + dataset) |
 
@@ -72,17 +101,32 @@
 | v0.9 | 2026-02-07 | Data Lead | Rà soát mô hình dữ liệu và naming convention. |
 | v1.0 | 2026-02-10 | Senior BI Solution Architect | Phát hành baseline cho stakeholder và developer. |
 | v2.0 | 2026-02-10 | Senior BI Solution Architect | Bổ sung visual flow, KPI charts, wireframe dashboard, sign-off template. |
+| v2.1 | 2026-02-10 | Senior BI Solution Architect | Bổ sung Reading Path + hyperlink giữa Overview và các sheet để điều hướng theo thứ tự đọc. |
 
 ## Sheet: Overview
 
-| Hạng mục | Mô tả |
-| --- | --- |
-| Kiến trúc tổng thể | Nguồn SQL Server -> ETL (SSIS + SQL Agent) -> Data Warehouse (Raw/Clean/Semantic) -> Power BI Dataset -> Dashboard trên Power BI Service. |
-| Luồng dữ liệu | Extract incremental theo LastUpdatedDatetime; chuẩn hóa master data ở Clean; build star schema ở Semantic; refresh dataset 6 lần/ngày. |
-| Phân tầng Raw | Lưu dữ liệu nguồn gần nguyên bản, thêm ETLBatchID và thời gian extract để truy vết. |
-| Phân tầng Clean | Chuẩn hóa đơn vị đo, mã dự án, mã vật tư, mã nhà thầu; xử lý bản ghi trùng và null key. |
-| Phân tầng Semantic | Tối ưu cho Power BI bằng star schema, surrogate key int, measure tính bằng DAX. |
-| Sơ đồ ASCII | [SQL Server: ERP \| PMIS \| Procurement \| Cost]<br>                 \|<br>          [SSIS + SQL Agent]<br>                 \|<br>          [DW_Raw] -> [DW_Clean] -> [DW_Semantic]<br>                                       \|<br>                              [Power BI Dataset]<br>                                       \|<br> [Executive \| Cost \| Progress \| Material Dashboards]<br>                                       \|<br>                    [Power BI Service + RLS + Alerts] |
+| Hạng mục | Mô tả |  |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| Kiến trúc tổng thể | Nguồn SQL Server -> ETL (SSIS + SQL Agent) -> Data Warehouse (Raw/Clean/Semantic) -> Power BI Dataset -> Dashboard trên Power BI Service. |  |  |  |  |
+| Luồng dữ liệu | Extract incremental theo LastUpdatedDatetime; chuẩn hóa master data ở Clean; build star schema ở Semantic; refresh dataset 6 lần/ngày. |  |  |  |  |
+| Phân tầng Raw | Lưu dữ liệu nguồn gần nguyên bản, thêm ETLBatchID và thời gian extract để truy vết. |  |  |  |  |
+| Phân tầng Clean | Chuẩn hóa đơn vị đo, mã dự án, mã vật tư, mã nhà thầu; xử lý bản ghi trùng và null key. |  |  |  |  |
+| Phân tầng Semantic | Tối ưu cho Power BI bằng star schema, surrogate key int, measure tính bằng DAX. |  |  |  |  |
+| Sơ đồ ASCII | [SQL Server: ERP \| PMIS \| Procurement \| Cost]<br>                 \|<br>          [SSIS + SQL Agent]<br>                 \|<br>          [DW_Raw] -> [DW_Clean] -> [DW_Semantic]<br>                                       \|<br>                              [Power BI Dataset]<br>                                       \|<br> [Executive \| Cost \| Progress \| Material Dashboards]<br>                                       \|<br>                    [Power BI Service + RLS + Alerts] |  |  |  |  |
+| NAVIGATION FROM OVERVIEW |  |  |  |  |  |
+| Step | Đi tới sheet | Đọc để làm gì | Input | Output | Ai nên đọc |
+| 1 | 00_ReadMe_Visual | Nắm cấu trúc tài liệu và legend màu | - | Architecture_Flow_v2 | All |
+| 2 | Architecture_Flow_v2 | Hiểu kiến trúc end-to-end từ source đến report | ReadMe | Overview | Stakeholder + Architect |
+| 3 | Overview | Hiểu tầng dữ liệu, flow và quy tắc triển khai mức cao | Architecture | Modules | PMO + Business |
+| 4 | Modules | Hiểu từng subject area và người dùng chính | Overview | Dashboards | Business Owner |
+| 5 | Dashboards | Hiểu dashboard mục tiêu và insight kỳ vọng | Modules | KPI | Sponsor + BI Lead |
+| 6 | KPI | Hiểu định nghĩa KPI và ngưỡng cảnh báo | Dashboards | DataModel | Business + Data |
+| 7 | DataModel | Hiểu fact/dim và khóa liên kết chính | KPI | SourceMapping | Data Engineer |
+| 8 | SourceMapping | Map chi tiết từ SQL Server sang Power BI | DataModel | DAXLogic | ETL Dev |
+| 9 | DAXLogic | Hiểu công thức measure chính | KPI + Model | BusinessRules | Power BI Dev |
+| 10 | BusinessRules | Hiểu luật nghiệp vụ và ngoại lệ | DAX + Mapping | RLS | Business + QA |
+| 11 | RLS | Hiểu role và phân quyền dữ liệu | BusinessRules | SignOff_v2 | Security + PM |
+| 12 | SignOff_v2 | Ký xác nhận liên phòng ban | All previous | Go-live prep | PMO + Sponsor |
 
 ## Sheet: Modules
 
