@@ -18,30 +18,33 @@
 |  | 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard |  |  |  |
 |  | 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding |  |  |  |
 |  | 8 | KPI | Hiểu business definition + ngưỡng KPI |  |  |  |
+|  | NEW IN v2.2 - Module detail path |  |  |  |  |  |
+|  | Bước mới cần đọc sau Modules: | Module_Function_Spec_v2 | Mô tả chi tiết từng module cần làm gì ở mức implement |  |  |  |
 
 ## Sheet: 01_Reading_Path_v2
 
-| DETAIL DESIGN - RECOMMENDED READING PATH |  |  |  |  |  |  |
+| DETAIL DESIGN - RECOMMENDED READING PATH (UPDATED WITH MODULE FUNCTION SPEC) |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- | --- |
-| Đọc theo thứ tự từ trên xuống. Cột "Liên kết sheet" có hyperlink để nhảy trực tiếp tới sheet tương ứng. |  |  |  |  |  |  |
+| Đọc theo thứ tự. Cột "Liên kết sheet" có hyperlink. Bổ sung bước Module_Function_Spec_v2 để dev biết rõ từng module cần làm gì. |  |  |  |  |  |  |
 | Step | Liên kết sheet | Mục tiêu đọc | Input nhận từ | Output chuyển tới | Persona chính | Kết quả kỳ vọng |
 | 1 | 00_ReadMe_Visual | Nắm roadmap đọc tài liệu detail | - | ERD_Star_Visual_v2 | All | Biết điểm bắt đầu |
 | 2 | ERD_Star_Visual_v2 | Hiểu cấu trúc star schema trực quan | ReadMe | ETL_Swimlane_v2 | Data + BI Dev | Nắm liên kết Fact/Dim |
-| 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và các gate kiểm soát | ERD | Overview | Data Engineer | Chốt luồng pipeline |
+| 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và gate kiểm soát | ERD | Overview | Data Engineer | Chốt luồng pipeline |
 | 4 | Overview | Hiểu SLA, tầng dữ liệu, giả định triển khai | ETL Flow | Modules | Architect + PM | Đồng thuận kiến trúc |
-| 5 | Modules | Hiểu phạm vi từng subject area | Overview | DashboardCatalog | Business | Ưu tiên backlog |
-| 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard | Modules | DashboardLayoutSpec | Report Designer | Chốt trang báo cáo |
-| 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding | DashboardCatalog | KPI | Power BI Dev | Triển khai UI/UX report |
-| 8 | KPI | Hiểu business definition + ngưỡng KPI | Dashboard Spec | Traceability_Matrix_v2 | Business + QA | Chốt tiêu chí nghiệm thu |
-| 9 | Traceability_Matrix_v2 | Trace KPI -> DAX -> Source -> Test | KPI | DataModel | Dev + QA | Không thiếu mapping |
-| 10 | DataModel | Chi tiết field-level cho Fact/Dim | Traceability | ModelRelationships | Data Modeler | Build model chính xác |
-| 11 | ModelRelationships | Hiểu cardinality/filter direction | DataModel | SourceMapping | Power BI Dev | Tránh lỗi filter mơ hồ |
-| 12 | SourceMapping | Map source field -> semantic field + transform | Model | DAXLogic | ETL Dev | Triển khai ETL chuẩn |
-| 13 | DAXLogic | Công thức DAX đầy đủ + test case | KPI + Mapping | BusinessRules | Power BI Dev | Measure chạy đúng logic |
-| 14 | BusinessRules | Luật nghiệp vụ và ngoại lệ ngành xây dựng | DAX | RLS_Heatmap_v2 | Business + QA | Bộ rule kiểm thử hoàn chỉnh |
-| 15 | RLS_Heatmap_v2 | Nhìn nhanh phạm vi role và access | BusinessRules | RLS | Security | Xác nhận policy trước publish |
-| 16 | RLS | DAX filter role-level cho Power BI Service | RLS Heatmap | Refresh_Monitor_v2 | Security + Admin | Thiết lập phân quyền chính thức |
-| 17 | Refresh_Monitor_v2 | Theo dõi vận hành refresh/DQ sau triển khai | All implementation | Runbook | Operations | Sẵn sàng go-live monitoring |
+| 5 | Modules | Hiểu phạm vi module và mục tiêu nghiệp vụ | Overview | Module_Function_Spec_v2 | Business + PMO | Chốt scope theo module |
+| 6 | Module_Function_Spec_v2 | Hiểu chi tiết từng module cần làm gì ở mức chức năng | Modules | DashboardCatalog | Dev Lead + BA | Lập backlog implement rõ ràng |
+| 7 | DashboardCatalog | Hiểu mục tiêu từng dashboard | Module function spec | DashboardLayoutSpec | Report Designer | Chốt trang báo cáo |
+| 8 | DashboardLayoutSpec | Hiểu vị trí visual + field binding | DashboardCatalog | KPI | Power BI Dev | Triển khai UI/UX report |
+| 9 | KPI | Hiểu business definition + ngưỡng KPI | Dashboard spec | Traceability_Matrix_v2 | Business + QA | Chốt tiêu chí nghiệm thu |
+| 10 | Traceability_Matrix_v2 | Trace KPI -> DAX -> Source -> Test | KPI | DataModel | Dev + QA | Không thiếu mapping |
+| 11 | DataModel | Chi tiết field-level cho Fact/Dim | Traceability | ModelRelationships | Data Modeler | Build model chính xác |
+| 12 | ModelRelationships | Hiểu cardinality/filter direction | DataModel | SourceMapping | Power BI Dev | Tránh filter ambiguity |
+| 13 | SourceMapping | Map source -> semantic + transform | Model | DAXLogic | ETL Dev | Triển khai ETL chuẩn |
+| 14 | DAXLogic | Công thức DAX đầy đủ + test case | KPI + Mapping | BusinessRules | Power BI Dev | Measure chạy đúng logic |
+| 15 | BusinessRules | Luật nghiệp vụ và ngoại lệ | DAX | RLS_Heatmap_v2 | Business + QA | Bộ rule kiểm thử hoàn chỉnh |
+| 16 | RLS_Heatmap_v2 | Nhìn nhanh phạm vi role và access | BusinessRules | RLS | Security | Xác nhận policy trước publish |
+| 17 | RLS | DAX filter role-level trong service | RLS heatmap | Refresh_Monitor_v2 | Security + Admin | Thiết lập phân quyền chính thức |
+| 18 | Refresh_Monitor_v2 | Theo dõi vận hành refresh/DQ sau triển khai | All implementation | Runbook | Operations | Sẵn sàng go-live monitoring |
 
 ## Sheet: ERD_Star_Visual_v2
 
@@ -122,7 +125,7 @@
 | Phạm vi triển khai | Thiết kế chi tiết semantic model, dashboard, KPI, RLS cho 20 dự án xây dựng; dùng trực tiếp cho đội developer triển khai. |
 | Nguồn dữ liệu chính | SQL Server: ERP, PMIS, Procurement, Cost Control, Identity |
 | Công nghệ sử dụng | SQL Server 2022, SSIS, Power Query M, DAX, XMLA Endpoint, Power BI Service |
-| Phiên bản tài liệu | v2.1 - Detail Design (Visual + Navigation Linked) |
+| Phiên bản tài liệu | v2.2 - Detail Design (Visual + Navigation + Module Function Spec) |
 | Người tạo / Ngày tạo | Senior BI Solution Architect / 2026-02-10 |
 | Tiêu chuẩn phát triển | Naming: Fact*/Dim*; DateKey dạng YYYYMMDD; model star schema |
 
@@ -137,6 +140,7 @@
 | v1.0 | 2026-02-10 | Senior BI Solution Architect | Phát hành tài liệu detail cho triển khai. |
 | v2.0 | 2026-02-10 | Senior BI Solution Architect | Bổ sung ERD visual, ETL swimlane, traceability matrix, RLS heatmap, refresh monitoring charts. |
 | v2.1 | 2026-02-10 | Senior BI Solution Architect | Bổ sung Reading Path + hyperlink điều hướng từ Overview tới các sheet thiết kế chi tiết theo thứ tự implement. |
+| v2.2 | 2026-02-10 | Senior BI Solution Architect | Bổ sung mô tả chức năng chi tiết cho từng module (must-have), thêm Module_Function_Spec_v2 và cập nhật luồng đọc. |
 
 ## Sheet: Overview
 
@@ -148,35 +152,72 @@
 | Phân tầng Clean | Chuẩn hóa UOM, mã master data, chuẩn email UPN, xử lý duplicate business key. |  |  |  |  |
 | Phân tầng Semantic | Star schema surrogate key int, quan hệ single-direction, ưu tiên measure để tối ưu model size. |  |  |  |  |
 | ASCII architecture | [SQL Server OLTP]<br> ERP \| PMIS \| Procurement \| Cost \| Identity<br>                \|<br>          [SSIS Orchestration]<br>                \|<br>      [DW_Raw] -> [DW_Clean] -> [DW_Semantic]<br>                               \|<br>                    [Power BI Dataset]<br>                               \|<br>         [Executive][Material][Cost][Progress]<br>                               \|<br>                 [Power BI Service + RLS] |  |  |  |  |
+|  | #'00_ReadMe_Visual'!A1 |  |  |  |  |
+|  | #'ERD_Star_Visual_v2'!A1 |  |  |  |  |
+|  | #'ETL_Swimlane_v2'!A1 |  |  |  |  |
+|  | #'Overview'!A1 |  |  |  |  |
+|  | #'Modules'!A1 |  |  |  |  |
+|  | #'DashboardCatalog'!A1 |  |  |  |  |
+|  | #'DashboardLayoutSpec'!A1 |  |  |  |  |
+|  | #'KPI'!A1 |  |  |  |  |
+|  | #'Traceability_Matrix_v2'!A1 |  |  |  |  |
+|  | #'DataModel'!A1 |  |  |  |  |
+|  | #'ModelRelationships'!A1 |  |  |  |  |
+|  | #'SourceMapping'!A1 |  |  |  |  |
+|  | #'DAXLogic'!A1 |  |  |  |  |
+|  | #'BusinessRules'!A1 |  |  |  |  |
+|  | #'RLS_Heatmap_v2'!A1 |  |  |  |  |
+|  | #'RLS'!A1 |  |  |  |  |
+|  | #'Refresh_Monitor_v2'!A1 |  |  |  |  |
 | NAVIGATION FROM OVERVIEW |  |  |  |  |  |
 | Step | Đi tới sheet | Đọc để làm gì | Input | Output | Ai nên đọc |
-| 1 | 00_ReadMe_Visual | Nắm roadmap đọc tài liệu detail | - | ERD_Star_Visual_v2 | All |
-| 2 | ERD_Star_Visual_v2 | Hiểu cấu trúc star schema trực quan | ReadMe | ETL_Swimlane_v2 | Data + BI Dev |
-| 3 | ETL_Swimlane_v2 | Hiểu trình tự ETL và các gate kiểm soát | ERD | Overview | Data Engineer |
-| 4 | Overview | Hiểu SLA, tầng dữ liệu, giả định triển khai | ETL Flow | Modules | Architect + PM |
-| 5 | Modules | Hiểu phạm vi từng subject area | Overview | DashboardCatalog | Business |
-| 6 | DashboardCatalog | Hiểu mục tiêu từng dashboard | Modules | DashboardLayoutSpec | Report Designer |
-| 7 | DashboardLayoutSpec | Hiểu vị trí visual + field binding | DashboardCatalog | KPI | Power BI Dev |
-| 8 | KPI | Hiểu business definition + ngưỡng KPI | Dashboard Spec | Traceability_Matrix_v2 | Business + QA |
-| 9 | Traceability_Matrix_v2 | Trace KPI -> DAX -> Source -> Test | KPI | DataModel | Dev + QA |
-| 10 | DataModel | Chi tiết field-level cho Fact/Dim | Traceability | ModelRelationships | Data Modeler |
-| 11 | ModelRelationships | Hiểu cardinality/filter direction | DataModel | SourceMapping | Power BI Dev |
-| 12 | SourceMapping | Map source field -> semantic field + transform | Model | DAXLogic | ETL Dev |
-| 13 | DAXLogic | Công thức DAX đầy đủ + test case | KPI + Mapping | BusinessRules | Power BI Dev |
-| 14 | BusinessRules | Luật nghiệp vụ và ngoại lệ ngành xây dựng | DAX | RLS_Heatmap_v2 | Business + QA |
-| 15 | RLS_Heatmap_v2 | Nhìn nhanh phạm vi role và access | BusinessRules | RLS | Security |
-| 16 | RLS | DAX filter role-level cho Power BI Service | RLS Heatmap | Refresh_Monitor_v2 | Security + Admin |
-| 17 | Refresh_Monitor_v2 | Theo dõi vận hành refresh/DQ sau triển khai | All implementation | Runbook | Operations |
+| 1 | Modules | Nắm phạm vi từng module | Overview | Module_Function_Spec_v2 | PMO + Business |
+| 2 | Module_Function_Spec_v2 | Hiểu chi tiết module cần làm gì ở mức chức năng | Modules | DashboardCatalog | BA + Dev Lead |
+| 3 | DashboardCatalog | Hiểu dashboard mục tiêu | Function spec | DashboardLayoutSpec | Report Designer |
+| 4 | DashboardLayoutSpec | Chốt visual-level design | DashboardCatalog | KPI | Power BI Dev |
+| 5 | KPI | Chốt định nghĩa đo lường | Layout spec | Traceability_Matrix_v2 | Business + QA |
+| 6 | Traceability_Matrix_v2 | Trace KPI sang DAX/source/test | KPI | DataModel | Dev + QA |
+| 7 | DataModel | Chốt field-level model | Traceability | SourceMapping | Data Engineer |
+| 8 | SourceMapping | Chốt transform source -> semantic | DataModel | DAXLogic | ETL Dev |
+| 9 | DAXLogic | Chốt công thức implement | Mapping | BusinessRules | Power BI Dev |
+| 10 | BusinessRules | Chốt rule nghiệp vụ/ngoại lệ | DAX | RLS | Business + QA |
+| 11 | RLS | Chốt phân quyền dữ liệu | BusinessRules | Refresh_Monitor_v2 | Security + Admin |
+| 12 | Refresh_Monitor_v2 | Theo dõi vận hành sau triển khai | All | Runbook | Operations |
 
 ## Sheet: Modules
 
-| Module ID | Subject Area | Mục tiêu nghiệp vụ | Persona chính | Input dataset (SQL) | Output dashboard | KPI trọng tâm | Tần suất refresh | SLA |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| M01 | Material Management | Kiểm soát tiêu thụ vật tư theo định mức BOM và hao hụt theo nhà thầu/site. | Project Manager; Site Engineer; Procurement | MaterialMaster, MaterialIssueLine, MaterialReturnLine, BOMNorm | Material Consumption Control | Total Material Qty; Overuse %; Return Rate | 2 giờ/lần | Freshness <= 2h |
-| M02 | Construction Progress | So sánh baseline vs actual theo work package/milestone và cảnh báo delay risk. | Planning Engineer; PM | BaselineSchedule, ProgressDaily, WorkPackagePlan | Progress & Delay Risk | Planned vs Actual %; Delay Days; SPI | 2 giờ/lần | Freshness <= 2h |
-| M03 | Cost & Budget | Giám sát chi phí thực tế, ngân sách, cam kết chi và change order. | Finance Controller; PM; PMO | CostLedger, BudgetBaseline, CommitmentLedger, ChangeOrder | Cost vs Budget Deep Dive | Actual Cost; Budget Variance %; CPI | 2 giờ/lần | Freshness <= 2h |
-| M04 | Contractor Performance | Đánh giá năng suất và tuân thủ SLA nhà thầu. | Contract Manager; PMO | ContractorMaster, ContractorKPI, DeliveryPerformance | Contractor Scorecard | Productivity Index; On-time Delivery % | Ngày | Daily 06:00 |
-| M05 | Acceptance & Billing | Đối soát khối lượng nghiệm thu và thanh toán theo đợt. | QS; Site Engineer; Finance | AcceptanceMinutes, BillingProgress, PaymentCertificate | Acceptance & Billing Tracker | Accepted Qty; Pending Billing Amount | Ngày | Daily 06:00 |
+| Module ID | Subject Area | Mục tiêu nghiệp vụ | Persona chính | Input dataset (SQL) | Output dashboard | KPI trọng tâm | Chức năng chi tiết cần triển khai (Must-Have) | Integration / Dependencies | Definition of Done (DoD) | Tần suất refresh | SLA |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| M01 | Material Management | Kiểm soát tiêu thụ vật tư theo định mức BOM và hao hụt theo nhà thầu/site. | Project Manager; Site Engineer; Procurement | MaterialMaster, MaterialIssueLine, MaterialReturnLine, BOMNorm | Material Consumption Control | Total Material Qty; Overuse %; Return Rate | 1) Theo dõi nhập-xuất-trả theo ngày/công trình/work package<br>2) Tính NetQty, OverNormQty ở mức transaction<br>3) Drillthrough tới chứng từ nguồn<br>4) Cảnh báo overuse theo ngưỡng 5/10%<br>5) Phân tích mix vật tư theo nhóm + contractor | Phụ thuộc BOM approved, DimMaterial chuẩn hóa, mapping WorkPackage; đồng bộ với module tiến độ để kiểm tra mức tiêu hao theo khối lượng thực hiện. | Dashboard hiển thị đúng KPI theo test case TC-KPI-001/002; giao dịch thiếu BOM được tách trạng thái Data Issue; PM drill tới DocNo được. | 2 giờ/lần | Freshness <= 2h |
+| M02 | Construction Progress | So sánh baseline vs actual theo work package/milestone và cảnh báo delay risk. | Planning Engineer; PM | BaselineSchedule, ProgressDaily, WorkPackagePlan | Progress & Delay Risk | Planned vs Actual %; Delay Days; SPI | 1) So sánh PlannedQty vs ActualCompletedQty theo tuần<br>2) Tính DelayDays và phân tầng risk level<br>3) Theo dõi milestone critical path<br>4) Cảnh báo SPI < 0.95<br>5) Drilldown Project -> Phase -> WorkPackage | Phụ thuộc DimDate, DimWorkPackage và dữ liệu baseline được khóa phiên bản; dùng cùng chuẩn ProjectKey với cost/material để phân tích liên thông. | Trend line, milestone table, risk matrix khớp dữ liệu nguồn; quy tắc cap tiến độ <=100% hoạt động đúng; delay âm được ép 0. | 2 giờ/lần | Freshness <= 2h |
+| M03 | Cost & Budget | Giám sát chi phí thực tế, ngân sách, cam kết chi và change order. | Finance Controller; PM; PMO | CostLedger, BudgetBaseline, CommitmentLedger, ChangeOrder | Cost vs Budget Deep Dive | Actual Cost; Budget Variance %; CPI | 1) Tổng hợp Budget/Actual/Committed theo category<br>2) Tính Variance và Variance% theo nhiều cấp<br>3) Waterfall phân rã nguyên nhân chênh lệch<br>4) Theo dõi ChangeOrder tác động ngân sách<br>5) Cảnh báo >5% (vàng), >10% (đỏ) | Phụ thuộc chuẩn CostCategory hierarchy, quy đổi tiền tệ VND và loại bỏ reversal; cần liên kết EV từ module tiến độ để tính CPI. | KPI chi phí đối soát với finance ledger sai lệch <=0.5%; matrix drilldown đầy đủ 3 tầng; màu cảnh báo đúng ngưỡng. | 2 giờ/lần | Freshness <= 2h |
+| M04 | Contractor Performance | Đánh giá năng suất và tuân thủ SLA nhà thầu. | Contract Manager; PMO | ContractorMaster, ContractorKPI, DeliveryPerformance | Contractor Scorecard | Productivity Index; On-time Delivery % | 1) Xếp hạng nhà thầu theo productivity/cost/schedule<br>2) Tính On-time delivery theo ETA ±1 ngày<br>3) Theo dõi lỗi SLA theo loại vi phạm<br>4) Benchmark giữa các nhà thầu cùng loại<br>5) Cảnh báo nhà thầu dưới ngưỡng tier B | Phụ thuộc dữ liệu labor hours, delivery log và mapping contractor-company cho RLS; dùng dữ liệu kết hợp từ material + progress + cost. | Scorecard tái lập được theo tháng; rule loại bản ghi thiếu labor hour hoạt động đúng; contractor external chỉ thấy dữ liệu own company. | Ngày | Daily 06:00 |
+| M05 | Acceptance & Billing | Đối soát khối lượng nghiệm thu và thanh toán theo đợt. | QS; Site Engineer; Finance | AcceptanceMinutes, BillingProgress, PaymentCertificate | Acceptance & Billing Tracker | Accepted Qty; Pending Billing Amount | 1) Theo dõi accepted qty theo giai đoạn<br>2) So sánh thi công thực tế vs nghiệm thu<br>3) Theo dõi hồ sơ thanh toán pending/approved/paid<br>4) Cảnh báo quá hạn thanh toán theo SLA<br>5) Drillthrough tới biên bản nghiệm thu | Phụ thuộc chứng từ nghiệm thu chuẩn hóa và status workflow thanh toán; cần liên kết với tiến độ để tránh nghiệm thu vượt thực tế. | Báo cáo thể hiện đúng trạng thái hồ sơ; pending amount tính đúng theo kỳ; drillthrough biên bản/phiếu thanh toán hoạt động. | Ngày | Daily 06:00 |
+
+## Sheet: Module_Function_Spec_v2
+
+| Module ID | Function ID | Function Name | Mô tả chi tiết cần làm | Input chính | Logic xử lý chính | Output / Visual | Priority | Owner | Acceptance Criteria |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| M01 | M01-F01 | Material Ledger Consolidation | Hợp nhất phiếu xuất, phiếu trả, điều chỉnh tồn theo ngày và WorkPackage. | MaterialIssueLine, MaterialReturnLine | NetQty = Issued - Return; loại chứng từ cancelled. | Table giao dịch + KPI NetQty | High | Data Engineer | Số liệu khớp tổng source lệch <=0.5% |
+| M01 | M01-F02 | Overuse Detection | Tính lượng vượt định mức theo BOM version hiệu lực. | BOMNorm + NetQty | OverNormQty = max(NetQty - NormQty,0). | KPI Overuse % + Heatmap | High | BI Developer | Ngưỡng cảnh báo 5/10% hiển thị đúng màu |
+| M01 | M01-F03 | Material Mix Analysis | Phân tích cơ cấu vật tư theo nhóm / dự án / nhà thầu. | DimMaterial + FactMaterialConsumption | Tính share theo filter context. | Donut + stacked column | Medium | BI Analyst | Top nhóm vật tư đúng theo filter |
+| M01 | M01-F04 | Document Drillthrough | Drillthrough từ KPI/heatmap xuống chứng từ nguồn. | SourceDocNo, ProjectKey | Giữ grain transaction để trace. | Drillthrough page | High | BI Developer | Click 1 dòng mở đúng chứng từ |
+| M02 | M02-F01 | Progress Baseline Comparison | So sánh tiến độ baseline vs actual theo tuần. | ProgressDaily, WorkPackagePlan | Planned%/Actual% theo BaselineQty. | Line trend planned vs actual | High | Planning BI Analyst | Trend khớp bảng tiến độ nguồn |
+| M02 | M02-F02 | Delay Risk Scoring | Chấm điểm rủi ro theo DelayDays + SPI. | DelayDays, SPI | Risk = High/Medium/Low theo rule BR. | Risk matrix | High | BI Developer | Rule biên 7/14 ngày đúng |
+| M02 | M02-F03 | Milestone Tracking | Theo dõi milestone critical với cảnh báo quá hạn. | Milestone schedule | DelayDays = max(0, Forecast-Plan). | Milestone warning table | High | Planning Engineer | Milestone quá hạn tô màu đỏ |
+| M02 | M02-F04 | WorkPackage Drill Path | Drill Project -> Phase -> WorkPackage để khoanh vùng chậm. | DimWorkPackage, FactProgressTracking | Hierarchy filter context chính xác. | Matrix drilldown | Medium | BI Developer | Drill path không mất ngữ cảnh |
+| M03 | M03-F01 | Budget-Actual Consolidation | Tổng hợp budget, actual, committed theo category và kỳ. | BudgetBaseline, CostLedger, CommitmentLedger | Loại reversal, quy đổi VND. | KPI cards + matrix | High | Finance BI Analyst | Đối soát finance pass <=0.5% |
+| M03 | M03-F02 | Variance Waterfall | Phân rã nguyên nhân chênh lệch ngân sách. | FactProjectCost, DimCostCategory | Variance = Actual - Budget theo driver. | Waterfall chart | High | BI Analyst | Top driver đúng với matrix |
+| M03 | M03-F03 | Alerting Rules | Thiết lập cảnh báo vượt 5%/10%. | Budget Variance % | Rule màu vàng/đỏ theo threshold. | Card + conditional matrix | High | BI Developer | Màu cảnh báo đúng ngưỡng |
+| M03 | M03-F04 | Change Order Impact | Phân tích tác động phát sinh lên ngân sách. | ChangeOrder | Theo dõi delta trước/sau CO. | Bar + trend line | Medium | PMO Analyst | CO approved mới được tính |
+| M04 | M04-F01 | Contractor Productivity Score | Tính năng suất theo sản lượng/giờ công. | ActualCompletedQty, LaborHours | Productivity = Qty/LaborHours; loại zero hours. | Scorecard KPI | High | Contract Manager | Top/Bottom contractor đúng logic |
+| M04 | M04-F02 | On-time Delivery SLA | Đo tỷ lệ giao hàng đúng hạn ETA ±1 ngày. | DeliveryPerformance | On-time count / total count. | SLA bar chart | High | Procurement Analyst | Tỷ lệ đúng với log giao nhận |
+| M04 | M04-F03 | Contractor Benchmark | So sánh nhà thầu cùng nhóm công việc. | DimContractor, KPI scores | Ranking theo weighted score. | Benchmark matrix | Medium | BI Analyst | Ranking ổn định theo kỳ |
+| M04 | M04-F04 | External Access Scope | Giới hạn nhà thầu chỉ thấy dữ liệu own company. | SecurityUserProject, CompanyCode | RLS filter theo company. | External contractor view | High | Security Admin | Tài khoản ngoài chỉ thấy dữ liệu hợp lệ |
+| M05 | M05-F01 | Acceptance Progress Tracking | Theo dõi accepted qty theo phase/work package. | AcceptanceMinutes | AcceptedQty tổng hợp theo kỳ. | Acceptance trend | High | QS Analyst | Accepted qty khớp biên bản |
+| M05 | M05-F02 | Construction vs Acceptance Reconcile | Đối soát thi công thực tế với nghiệm thu. | FactProgressTracking + Acceptance | Variance giữa actual completed và accepted. | Variance table | High | Site Engineer | Sai lệch vượt ngưỡng được cảnh báo |
+| M05 | M05-F03 | Billing Workflow Monitor | Theo dõi trạng thái pending/approved/paid hồ sơ. | BillingProgress, PaymentCertificate | Status lifecycle theo ngày xử lý. | Workflow funnel + table | High | Finance Ops | Pending quá SLA hiển thị đỏ |
+| M05 | M05-F04 | Payment Delay Alert | Cảnh báo hồ sơ thanh toán quá hạn SLA. | DueDate, PaymentDate | Delay = max(0, PaymentDate-DueDate). | Delay alert dashboard | Medium | Finance Controller | Danh sách quá hạn đúng theo source |
 
 ## Sheet: DashboardCatalog
 
